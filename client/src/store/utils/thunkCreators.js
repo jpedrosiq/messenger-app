@@ -91,7 +91,6 @@ const sendMessage = (data, body) => {
 export const postMessage = (body) => async (dispatch) => {
   try {
     const { data } = await axios.post("/api/messages", body);
-    console.log("this is the data: ", data);
 
     if (!body.conversationId) {
       dispatch(addConversation(body.recipientId, data.message));
