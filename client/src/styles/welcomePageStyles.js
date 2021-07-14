@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     flexDirection: "row",
@@ -47,9 +47,9 @@ export const useStyles = makeStyles(() => ({
     margin: "40px auto",
     width: "160px",
     height: "56px",
-    backgroundColor: "#3a8dff",
+    backgroundColor: theme.palette.primary.main,
     color: "white",
-    fontSize: "14px",
+    fontSize: theme.typography.fontSize,
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -66,7 +66,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: "12px",
   },
   headerButton: {
-    color: "#3a8dff",
+    color: theme.palette.primary.main,
     marginLeft: "100px",
     height: "54px",
     width: "170px",
@@ -95,5 +95,11 @@ export const useStyles = makeStyles(() => ({
     maxWidth: "100%",
     height: "auto",
     width: "75vw",
+  },
+  forgot: {
+    paddingRight: 10,
+    paddingBottom: 5,
+    fontSize: theme.typography.fontSize,
+    color: theme.palette.primary.main,
   },
 }));

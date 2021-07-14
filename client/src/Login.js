@@ -76,6 +76,13 @@ const Login = (props) => {
                     className={classes.textField}
                     type="password"
                     name="password"
+                    InputProps={{
+                      endAdornment: (
+                        <Typography className={classes.forgot}>
+                          Forgot?
+                        </Typography>
+                      ),
+                    }}
                   />
                 </FormControl>
               </Grid>
