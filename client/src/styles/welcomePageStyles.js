@@ -9,6 +9,7 @@ export const useStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    zIndex: 1,
   },
   sideBanner: {
     position: "relative",
@@ -85,6 +86,7 @@ export const useStyles = makeStyles(() => ({
   },
   headerText: {
     color: "rgb(143, 143, 143)",
+    marginLeft: "10px",
   },
   textField: {
     width: "400px",
