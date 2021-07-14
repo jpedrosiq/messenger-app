@@ -13,9 +13,11 @@ import {
 import { register } from "./store/utils/thunkCreators";
 import BgImage from "./assets/images/bg-img.png";
 import BubbleChat from "./assets/images/bubble.svg";
-import "./styles/signup-login.css";
+import { useStyles } from "./styles/welcomePageStyles";
 
 const Login = (props) => {
+  const classes = useStyles();
+
   const history = useHistory();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
@@ -40,41 +42,37 @@ const Login = (props) => {
   }
 
   return (
-    <div className="signup-page-container">
-      <div className="side-banner">
-        <div className="side-banner-description">
+    <Box className={classes.root}>
+      <Box className={classes.sideBanner}>
+        <Box className={classes.sideBannerDescription}>
           <img src={BubbleChat} alt="bubble-chat" width="67px" height="67px" />
           <span>Converse with anyone with any language</span>
-        </div>
-        <img src={BgImage} alt="login-page" />
-      </div>
-      <div className="signup-content-container">
-        <div className="signup-header">
-          <Typography
-            style={{ color: "rgb(143, 143, 143)" }}
-            variant="subtitle2"
-          >
+        </Box>
+        <img className={classes.bgImage} src={BgImage} alt="login-page" />
+      </Box>
+      <Box className={classes.welcomePageContainer}>
+        <Box className={classes.headerContent}>
+          <Typography className={classes.headerText} variant="subtitle2">
             Already have an account?
           </Typography>
           <Button
-            style={{ color: "#3a8dff", marginLeft: "100px" }}
-            className="login-signup-button"
+            className={classes.headerButton}
             onClick={() => history.push("/login")}
           >
             Login
           </Button>
-        </div>
-        <Grid container justify="center">
+        </Box>
+        <Grid container justifyContent="center">
           <Box m={4}>
-            <form className="login-signup-form" onSubmit={handleRegister}>
+            <form className={classes.form} onSubmit={handleRegister}>
               <Grid>
                 <Typography variant="h5">Create an account.</Typography>
                 <Grid>
                   <FormControl>
-                    <span className="form-label">Username</span>
+                    <span className={classes.formLabel}>Username</span>
                     <TextField
                       aria-label="username"
-                      style={{ width: "400px" }}
+                      className={classes.textField}
                       name="username"
                       type="text"
                       required
@@ -83,11 +81,11 @@ const Login = (props) => {
                 </Grid>
                 <Grid>
                   <FormControl>
-                    <span className="form-label">E-mail address</span>
+                    <span className={classes.formLabel}>E-mail address</span>
                     <TextField
                       aria-label="e-mail address"
                       type="email"
-                      style={{ width: "400px" }}
+                      className={classes.textField}
                       name="email"
                       required
                     />
@@ -95,13 +93,13 @@ const Login = (props) => {
                 </Grid>
                 <Grid>
                   <FormControl error={!!formErrorMessage.confirmPassword}>
-                    <span className="form-label">Password</span>
+                    <span className={classes.formLabel}>Password</span>
                     <TextField
                       aria-label="password"
                       type="password"
                       inputProps={{ minLength: 6 }}
                       name="password"
-                      style={{ width: "400px" }}
+                      className={classes.textField}
                       required
                     />
                     <FormHelperText>
@@ -111,12 +109,12 @@ const Login = (props) => {
                 </Grid>
                 <Grid>
                   <FormControl error={!!formErrorMessage.confirmPassword}>
-                    <span className="form-label">Confirm Password</span>
+                    <span className={classes.formLabel}>Confirm Password</span>
                     <TextField
                       aria-label="confirm password"
                       type="password"
                       inputProps={{ minLength: 6 }}
-                      style={{ width: "400px" }}
+                      className={classes.textField}
                       name="confirmPassword"
                       required
                     />
@@ -127,7 +125,7 @@ const Login = (props) => {
                 </Grid>
               </Grid>
               <Button
-                class="submit-button"
+                className={classes.submitButton}
                 type="submit"
                 variant="contained"
                 size="large"
@@ -137,8 +135,8 @@ const Login = (props) => {
             </form>
           </Box>
         </Grid>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

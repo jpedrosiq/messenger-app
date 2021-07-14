@@ -12,11 +12,13 @@ import {
 import { login } from "./store/utils/thunkCreators";
 import BgImage from "./assets/images/bg-img.png";
 import BubbleChat from "./assets/images/bubble.svg";
-import "./styles/signup-login.css";
+import { useStyles } from "./styles/welcomePageStyles";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
+
+  const classes = useStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -31,58 +33,54 @@ const Login = (props) => {
   }
 
   return (
-    <div className="login-page-container">
-      <div className="side-banner">
-        <div className="side-banner-description">
+    <Box className={classes.root}>
+      <Box className={classes.sideBanner}>
+        <Box className={classes.sideBannerDescription}>
           <img src={BubbleChat} alt="bubble-chat" width="67px" height="67px" />
           <span>Converse with anyone with any language</span>
-        </div>
-        <img src={BgImage} alt="login-page" />
-      </div>
-      <div className="login-content-container">
-        <div className="login-header">
-          <Typography
-            style={{ color: "rgb(143, 143, 143)" }}
-            variant="subtitle2"
-          >
+        </Box>
+        <img className={classes.bgImage} src={BgImage} alt="login-page" />
+      </Box>
+      <Box className={classes.welcomePageContainer}>
+        <Box className={classes.headerContent}>
+          <Typography className={classes.headerText} variant="subtitle2">
             Don't have an account?
           </Typography>
           <Button
-            style={{ color: "#3a8dff", marginLeft: "100px" }}
-            className="login-signup-button"
+            className={classes.headerButton}
             onClick={() => history.push("/register")}
           >
             Register
           </Button>
-        </div>
-        <Grid container justify="center">
+        </Box>
+        <Grid container justifyContent="center">
           <Box m={4}>
-            <form className="login-signup-form" onSubmit={handleLogin}>
+            <form className={classes.form} onSubmit={handleLogin}>
               <Grid>
                 <Typography variant="h5">Welcome back!</Typography>
                 <Grid>
                   <FormControl margin="normal" required>
-                    <span className="form-label">Username</span>
+                    <span className={classes.formLabel}>Username</span>
                     <TextField
                       aria-label="username"
-                      style={{ width: "400px" }}
+                      className={classes.textField}
                       name="username"
                       type="text"
                     />
                   </FormControl>
                 </Grid>
                 <FormControl margin="normal" required>
-                  <span className="form-label">Password</span>
+                  <span className={classes.formLabel}>Password</span>
                   <TextField
                     aria-label="password"
-                    style={{ width: "400px" }}
+                    className={classes.textField}
                     type="password"
                     name="password"
                   />
                 </FormControl>
               </Grid>
               <Button
-                class="submit-button"
+                className={classes.submitButton}
                 type="submit"
                 variant="contained"
                 size="large"
@@ -92,8 +90,8 @@ const Login = (props) => {
             </form>
           </Box>
         </Grid>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
