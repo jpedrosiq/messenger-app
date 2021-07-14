@@ -89,7 +89,8 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: "10px",
   },
   textField: {
-    width: "400px",
+    maxWidth: "400px",
+    width: "95vw",
   },
   bgImage: {
     maxWidth: "100%",
