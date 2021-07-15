@@ -1,8 +1,14 @@
 import React, { Component } from "react";
-import { FormControl, FilledInput } from "@material-ui/core";
+import {
+  FormControl,
+  FilledInput,
+  Button,
+  InputAdornment,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
+import { theme } from "../../themes/theme";
 
 const styles = {
   root: {
@@ -14,6 +20,13 @@ const styles = {
     backgroundColor: "#F4F6FA",
     borderRadius: 8,
     marginBottom: 20,
+  },
+  button: {
+    color: theme.palette.action.disabled,
+    padding: theme.spacing(1),
+    marginRight: theme.spacing(2),
+    minWidth: 0,
+    fontSize: theme.spacing(2.5),
   },
 };
 
@@ -58,6 +71,26 @@ class Input extends Component {
             value={this.state.text}
             name="text"
             onChange={this.handleChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <input
+                  accept="image/*"
+                  hidden
+                  id="file-button"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="file-button">
+                  <Button
+                    component="span"
+                    title="Upload Images"
+                    className={classes.button}
+                  >
+                    <i className="fa fa-clone"></i>
+                  </Button>
+                </label>
+              </InputAdornment>
+            }
           />
         </FormControl>
       </form>
