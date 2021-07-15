@@ -89,8 +89,9 @@ export const useStyles = makeStyles((theme) => ({
   },
   bgImage: {
     maxWidth: "100%",
-    height: "auto",
+    minHeight: "100vh",
     width: "75vw",
+    objectFit: "cover",
   },
   forgot: {
     paddingRight: theme.spacing(1),
