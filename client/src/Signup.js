@@ -11,9 +11,8 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 import { register } from "./store/utils/thunkCreators";
-import BgImage from "./assets/images/bg-img.png";
-import BubbleChat from "./assets/images/bubble.svg";
 import { useStyles } from "./styles/welcomePageStyles";
+import SideBanner from "./styles/sideBanner";
 
 const Login = (props) => {
   const classes = useStyles();
@@ -43,13 +42,7 @@ const Login = (props) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.sideBanner}>
-        <Box className={classes.sideBannerDescription}>
-          <img src={BubbleChat} alt="bubble-chat" width="67px" height="67px" />
-          <span>Converse with anyone with any language</span>
-        </Box>
-        <img className={classes.bgImage} src={BgImage} alt="login-page" />
-      </Box>
+      <SideBanner classes={classes} />
       <Box className={classes.welcomePageContainer}>
         <Box className={classes.headerContent}>
           <Typography className={classes.headerText} variant="subtitle2">
