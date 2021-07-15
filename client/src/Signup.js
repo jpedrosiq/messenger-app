@@ -13,6 +13,7 @@ import {
 import { register } from "./store/utils/thunkCreators";
 import { useStyles } from "./styles/welcomePageStyles";
 import SideBanner from "./styles/sideBanner";
+import PageHeader from "./styles/welcomePageHeader";
 
 const Login = (props) => {
   const classes = useStyles();
@@ -44,17 +45,12 @@ const Login = (props) => {
     <Box className={classes.root}>
       <SideBanner classes={classes} />
       <Box className={classes.welcomePageContainer}>
-        <Box className={classes.headerContent}>
-          <Typography className={classes.headerText} variant="subtitle2">
-            Already have an account?
-          </Typography>
-          <Button
-            className={classes.headerButton}
-            onClick={() => history.push("/login")}
-          >
-            Login
-          </Button>
-        </Box>
+        <PageHeader
+          classes={classes}
+          headerContent="Already have an account?"
+          buttonContent="Login"
+          onClick={() => history.push("/login")}
+        />
         <Grid container justifyContent="center">
           <Box m={4}>
             <form className={classes.form} onSubmit={handleRegister}>
