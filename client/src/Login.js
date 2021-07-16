@@ -10,10 +10,15 @@ import {
   TextField,
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
+import { useStyles } from "./styles/welcomePageStyles";
+import SideBanner from "./styles/sideBanner";
+import PageHeader from "./styles/welcomePageHeader";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
+
+  const classes = useStyles();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -28,41 +33,61 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
-      <Box>
-        <Grid container item>
-          <Typography>Need to register?</Typography>
-          <Button onClick={() => history.push("/register")}>Register</Button>
-        </Grid>
-        <form onSubmit={handleLogin}>
-          <Grid>
-            <Grid>
-              <FormControl margin="normal" required>
-                <TextField
-                  aria-label="username"
-                  label="Username"
-                  name="username"
-                  type="text"
-                />
-              </FormControl>
-            </Grid>
-            <FormControl margin="normal" required>
-              <TextField
-                label="password"
-                aria-label="password"
-                type="password"
-                name="password"
-              />
-            </FormControl>
-            <Grid>
-              <Button type="submit" variant="contained" size="large">
+    <Box className={classes.root}>
+      <SideBanner classes={classes} />
+      <Box className={classes.welcomePageContainer}>
+        <PageHeader
+          classes={classes}
+          headerContent="Don't have an account?"
+          buttonContent="Register"
+          onClick={() => history.push("/register")}
+        />
+        <Grid container justifyContent="center">
+          <Box m={4}>
+            <form className={classes.form} onSubmit={handleLogin}>
+              <Grid>
+                <Typography variant="h5">Welcome back!</Typography>
+                <Grid>
+                  <FormControl margin="normal" required>
+                    <span className={classes.formLabel}>Username</span>
+                    <TextField
+                      aria-label="username"
+                      className={classes.textField}
+                      name="username"
+                      type="text"
+                    />
+                  </FormControl>
+                </Grid>
+                <FormControl margin="normal" required>
+                  <span className={classes.formLabel}>Password</span>
+                  <TextField
+                    aria-label="password"
+                    className={classes.textField}
+                    type="password"
+                    name="password"
+                    InputProps={{
+                      endAdornment: (
+                        <Typography className={classes.forgot}>
+                          Forgot?
+                        </Typography>
+                      ),
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+              <Button
+                className={classes.submitButton}
+                type="submit"
+                variant="contained"
+                size="large"
+              >
                 Login
               </Button>
-            </Grid>
-          </Grid>
-        </form>
+            </form>
+          </Box>
+        </Grid>
       </Box>
-    </Grid>
+    </Box>
   );
 };
 

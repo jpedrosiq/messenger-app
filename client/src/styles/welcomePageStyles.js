@@ -1,0 +1,102 @@
+import { makeStyles } from "@material-ui/core/styles";
+
+export const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  welcomePageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    zIndex: 1,
+  },
+  sideBanner: {
+    position: "relative",
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      top: "0",
+      left: "0",
+      background: "linear-gradient(#3a8dff, #86b9ff)",
+      opacity: "0.85",
+    },
+  },
+  sideBannerDescription: {
+    position: "absolute",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+    left: "50%",
+    transform: "translate(-50%,-30%)",
+    top: "30%",
+    zIndex: "1",
+    color: theme.palette.background.default,
+    width: "269px",
+    height: "186px",
+  },
+  submitButton: {
+    margin: theme.spacing(5, "auto"),
+    width: "160px",
+    height: "56px",
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.background.default,
+    fontSize: theme.typography.fontSize,
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    "&:hover": {
+      backgroundColor: "#529aff",
+    },
+  },
+  headerContent: {
+    display: "flex",
+    marginTop: theme.spacing(4),
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginRight: theme.spacing(5),
+    fontSize: "12px",
+  },
+  headerButton: {
+    color: theme.palette.primary.main,
+    marginLeft: theme.spacing(12),
+    height: "54px",
+    width: "170px",
+    boxShadow: "0 0 8px 0 rgb(0 0 0 / 20%)",
+    borderRadius: "5px",
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  formLabel: {
+    color: "rgb(143, 143, 143)",
+    fontSize: theme.typography.fontSize,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
+  headerText: {
+    color: "rgb(143, 143, 143)",
+    marginLeft: theme.spacing(1),
+  },
+  textField: {
+    maxWidth: "400px",
+    width: "95vw",
+  },
+  bgImage: {
+    maxWidth: "100%",
+    minHeight: "100vh",
+    width: "75vw",
+    objectFit: "cover",
+  },
+  forgot: {
+    paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(0.5),
+    fontSize: theme.typography.fontSize,
+    color: theme.palette.primary.main,
+  },
+}));
