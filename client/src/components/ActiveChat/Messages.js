@@ -11,6 +11,11 @@ const Messages = (props) => {
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
 
+        /** TODO: if appending attachments to message was succeeded,
+         *   we would have access to messages.attachments here,
+         *   and pass it as prop to <SenderBubble> to render images in chat
+         */
+
         return message.senderId === userId ? (
           <SenderBubble
             key={message.id}

@@ -31,6 +31,12 @@ const useStyles = makeStyles(() => ({
 const SenderBubble = (props) => {
   const classes = useStyles();
   const { time, text, attachments } = props;
+
+  /** TODO: if appending attachments to message was succeeded,
+   *   we would have created props 'attachments' to <SenderBubble> component,
+   *   and pass the message.attachments to it via <Messages> component
+   */
+
   if (attachments && attachments.length > 0) {
     return (
       <Box className={classes.root}>

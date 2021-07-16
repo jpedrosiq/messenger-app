@@ -55,7 +55,20 @@ class Input extends Component {
       sender: this.props.conversationId ? null : this.props.user,
       attachments: this.state.attachments,
     };
-    if (reqBody.text !== "") await this.props.postMessage(reqBody);
+
+    /** TODO: we would like to make this data (this.state.attachments) available to the store,
+     *  that way we could pass that data to <SenderBubble>, which will render all attached images
+     *  in the chat
+     */
+
+    // only post message when it's not an empty string, unless there are attachments to that message
+    if (
+      reqBody.attachments.length > 1 ||
+      (reqBody.text !== "" && reqBody.attachments.length === 0)
+    ) {
+      await this.props.postMessage(reqBody);
+    }
+    // empty the state (text and attachments) every time a message is posted
     this.setState({
       text: "",
       attachments: [],
