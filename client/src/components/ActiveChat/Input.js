@@ -55,7 +55,7 @@ class Input extends Component {
       sender: this.props.conversationId ? null : this.props.user,
       attachments: this.state.attachments,
     };
-    await this.props.postMessage(reqBody);
+    if (reqBody.text !== "") await this.props.postMessage(reqBody);
     this.setState({
       text: "",
       attachments: [],
