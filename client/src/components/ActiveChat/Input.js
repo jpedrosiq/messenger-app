@@ -35,6 +35,7 @@ class Input extends Component {
     super(props);
     this.state = {
       text: "",
+      attachments: [],
     };
   }
 
@@ -52,11 +53,37 @@ class Input extends Component {
       recipientId: this.props.otherUser.id,
       conversationId: this.props.conversationId,
       sender: this.props.conversationId ? null : this.props.user,
+      attachments: this.state.attachments,
     };
     await this.props.postMessage(reqBody);
     this.setState({
       text: "",
+      attachments: [],
     });
+  };
+
+  uploadImage = (files) => {
+    const formData = new FormData();
+
+    for (let idx in files) {
+      let file = files[idx];
+      formData.append("file", file);
+      formData.append("upload_preset", "vgnox97i");
+
+      fetch("https://api.cloudinary.com/v1_1/dtcgl7plw/image/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          this.setState((prevState) => ({
+            attachments: [...prevState.attachments, data.url],
+          }));
+        });
+    }
   };
 
   render() {
@@ -79,6 +106,7 @@ class Input extends Component {
                   id="file-button"
                   multiple
                   type="file"
+                  onChange={(e) => this.uploadImage(e.target.files)}
                 />
                 <label htmlFor="file-button">
                   <Button
