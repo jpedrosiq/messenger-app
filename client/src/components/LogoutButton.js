@@ -6,10 +6,11 @@ import { Button } from "@material-ui/core";
 import { logout } from "../store/utils/thunkCreators";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { clearOnLogout } from "../store/index";
+import { theme } from "../themes/theme";
 
 const styles = {
-  root: {
-    height: "97vh",
+  logout: {
+    color: theme.palette.secondary.main,
   },
 };
 
@@ -45,7 +46,11 @@ class LogoutButton extends Component {
         {/* logout button will eventually be in a dropdown next to username */}
         {/* <MoreHorizIcon classes={{ root: classes.ellipsis }} /> */}
 
-        <Button className={classes.logout} onClick={this.handleLogout}>
+        <Button
+          title="Logout"
+          className={classes.logout}
+          onClick={this.handleLogout}
+        >
           <MoreHorizIcon classes={{ root: classes.ellipsis }} />
         </Button>
       </>
