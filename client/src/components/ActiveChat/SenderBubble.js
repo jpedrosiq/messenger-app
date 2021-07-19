@@ -26,32 +26,35 @@ const useStyles = makeStyles(() => ({
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px",
   },
+  attachments: {
+    width: "50%",
+    borderRadius: "10px 10px 0 10px",
+    float: "right",
+  },
 }));
 
 const SenderBubble = (props) => {
   const classes = useStyles();
   const { time, text, attachments } = props;
 
-  /** TODO: if appending attachments to message was succeeded,
-   *   we would have created props 'attachments' to <SenderBubble> component,
-   *   and pass the message.attachments to it via <Messages> component
-   */
-
-  if (attachments && attachments.length > 0) {
-    return (
-      <Box className={classes.root}>
-        {attachments.map((attachment, idx) => {
-          return (
-            <Image key={idx} cloudName="dtcgl7plw" publicId={attachment} />
-          );
-        })}
+  const renderAttachments =
+    attachments &&
+    attachments.length > 0 &&
+    attachments.map((attachment, idx) => (
+      <Box className={classes.attachments}>
+        <Image
+          className={classes.attachments}
+          key={idx}
+          cloudName="dtcgl7plw"
+          publicId={attachment}
+        />
       </Box>
-    );
-  }
+    ));
 
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
+      {renderAttachments}
       <Box className={classes.bubble}>
         <Typography className={classes.text}>{text}</Typography>
       </Box>
