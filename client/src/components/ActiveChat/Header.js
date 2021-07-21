@@ -9,30 +9,30 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     height: 89,
-    marginBottom: 34,
+    marginBottom: theme.spacing(4),
     boxShadow: "0 2px 20px 0 rgba(88,133,196,0.10)",
   },
   content: {
     display: "flex",
     alignItems: "center",
-    marginLeft: 24,
+    marginLeft: theme.spacing(3),
   },
   username: {
-    fontSize: 20,
+    fontSize: theme.typography.h6.fontSize,
     letterSpacing: -0.29,
-    fontWeight: "bold",
-    marginRight: 14,
+    fontWeight: theme.typography.fontWeightBold,
+    marginRight: theme.spacing(2),
   },
   statusText: {
-    fontSize: 12,
-    color: "#BFC9DB",
+    fontSize: theme.typography.caption.fontSize,
+    color: theme.palette.secondary.main,
     letterSpacing: -0.17,
   },
   statusDot: {
     height: 8,
     width: 8,
     borderRadius: "50%",
-    marginRight: 5,
+    marginRight: theme.spacing(0.6),
     backgroundColor: "#D0DAE9",
   },
   online: {
@@ -50,7 +50,7 @@ const Header = (props) => {
         <Typography className={classes.username}>{username}</Typography>
         <Box
           className={`${classes.statusDot} ${classes[online && "online"]}`}
-        ></Box>
+        />
         <Typography className={classes.statusText}>
           {online ? "Online" : "Offline"}
         </Typography>
