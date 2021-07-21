@@ -11,6 +11,15 @@ export const addMessageToStore = (state, payload) => {
     return [newConvo, ...state];
   }
 
+  /** TODO: we need to append array of attachments to each message
+   *  the message payload would look like this:
+   *  message: {
+   *      text: "some text",
+   *      attachments: ["attachment1", "attachment2"]
+   *      ...
+   * }
+   */
+
   return state.map((convo) => {
     if (convo.id === message.conversationId) {
       const convoCopy = { ...convo };
