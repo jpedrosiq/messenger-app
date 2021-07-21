@@ -71,28 +71,38 @@ class Input extends Component {
 
   uploadImage = (files) => {
     const formData = new FormData();
+    const attachments = [];
 
-    for (let idx in files) {
-      let file = files[idx];
-      formData.append("file", file);
+    // function that handles each promise post request from Cloudinary
+    const promiseForAttachmentUrl = (attachment) => {
+      formData.append("file", attachment);
       formData.append("upload_preset", "vgnox97i");
 
-      fetch("https://api.cloudinary.com/v1_1/dtcgl7plw/image/upload", {
+      return fetch("https://api.cloudinary.com/v1_1/dtcgl7plw/image/upload", {
         method: "POST",
         body: formData,
+      });
+    };
+
+    for (let idx in files) {
+      attachments.push(promiseForAttachmentUrl(files[idx]));
+    }
+
+    // only execute after all the images uploaded were fetched from Cloudinary
+    Promise.all(attachments)
+      .then((response) => {
+        return Promise.all(response.map((res) => res.json()));
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
+      .then((dataArr) => {
+        dataArr.forEach((data) => {
+          // only push the attachment to attachments array if url exists
           data.url &&
             this.setState((prevState) => ({
               attachments: [data.url, ...prevState.attachments],
             }));
         });
-    }
-    alert("Attachments successfully uploaded! Press 'enter' to submit.");
+        alert("Attachments successfully uploaded! Press 'enter' to submit.");
+      });
   };
 
   render() {
