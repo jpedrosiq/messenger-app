@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
 import { Image } from "cloudinary-react";
+import { theme } from "../../themes/theme";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -27,9 +28,16 @@ const useStyles = makeStyles(() => ({
     borderRadius: "10px 10px 0 10px",
   },
   attachments: {
-    width: "50%",
+    width: "47%",
     borderRadius: "10px 10px 0 10px",
-    float: "right",
+    marginLeft: theme.spacing(1),
+  },
+  images: {
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    width: "45vh",
+    justifyContent: "flex-end",
   },
 }));
 
@@ -40,21 +48,20 @@ const SenderBubble = (props) => {
   const renderAttachments =
     attachments &&
     attachments.length > 0 &&
-    attachments.map((attachment, idx) => (
-      <Box className={classes.attachments}>
-        <Image
-          className={classes.attachments}
-          key={idx}
-          cloudName="dtcgl7plw"
-          publicId={attachment}
-        />
-      </Box>
+    attachments.map((attachment) => (
+      <Image
+        className={classes.attachments}
+        key={attachment}
+        cloudName="dtcgl7plw"
+        publicId={attachment}
+      />
     ));
 
   return (
     <Box className={classes.root}>
       <Typography className={classes.date}>{time}</Typography>
-      {renderAttachments}
+      <Box className={classes.images}>{renderAttachments}</Box>
+
       <Box className={classes.bubble}>
         <Typography className={classes.text}>{text}</Typography>
       </Box>
