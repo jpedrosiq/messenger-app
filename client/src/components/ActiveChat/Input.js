@@ -92,6 +92,7 @@ class Input extends Component {
             }));
         });
     }
+    alert("Attachments successfully uploaded! Press 'enter' to submit.");
   };
 
   render() {
