@@ -43,9 +43,6 @@ class LogoutButton extends Component {
     }
     return (
       <>
-        {/* logout button will eventually be in a dropdown next to username */}
-        {/* <MoreHorizIcon classes={{ root: classes.ellipsis }} /> */}
-
         <Button
           title="Logout"
           className={classes.logout}
