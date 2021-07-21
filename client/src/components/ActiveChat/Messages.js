@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Box } from "@material-ui/core";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
 
 const Messages = (props) => {
   const { messages, otherUser, userId } = props;
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   return (
     <Box>
       {messages.map((message) => {
         const time = moment(message.createdAt).format("h:mm");
-
-        /** TODO: if appending attachments to message was succeeded,
-         *   we would have access to messages.attachments here,
-         *   and pass it as prop to <SenderBubble> to render images in chat
-         */
 
         return message.senderId === userId ? (
           <SenderBubble
@@ -32,6 +36,7 @@ const Messages = (props) => {
           />
         );
       })}
+      <div ref={messagesEndRef} />
     </Box>
   );
 };
