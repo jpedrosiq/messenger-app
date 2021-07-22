@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, Typography } from "@material-ui/core";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import LogoutButton from "../LogoutButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,40 +9,35 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-between",
     height: 89,
-    marginBottom: 34,
-    boxShadow: "0 2px 20px 0 rgba(88,133,196,0.10)"
+    marginBottom: theme.spacing(4),
+    boxShadow: "0 2px 20px 0 rgba(88,133,196,0.10)",
   },
   content: {
     display: "flex",
     alignItems: "center",
-    marginLeft: 24
+    marginLeft: theme.spacing(3),
   },
   username: {
-    fontSize: 20,
+    fontSize: theme.typography.h6.fontSize,
     letterSpacing: -0.29,
-    fontWeight: "bold",
-    marginRight: 14
+    fontWeight: theme.typography.fontWeightBold,
+    marginRight: theme.spacing(2),
   },
   statusText: {
-    fontSize: 12,
-    color: "#BFC9DB",
-    letterSpacing: -0.17
+    fontSize: theme.typography.caption.fontSize,
+    color: theme.palette.secondary.main,
+    letterSpacing: -0.17,
   },
   statusDot: {
     height: 8,
     width: 8,
     borderRadius: "50%",
-    marginRight: 5,
-    backgroundColor: "#D0DAE9"
+    marginRight: theme.spacing(0.6),
+    backgroundColor: "#D0DAE9",
   },
   online: {
-    background: "#1CED84"
+    background: "#1CED84",
   },
-  ellipsis: {
-    color: "#95A7C4",
-    marginRight: 24,
-    opacity: 0.5
-  }
 }));
 
 const Header = (props) => {
@@ -53,10 +48,16 @@ const Header = (props) => {
     <Box className={classes.root}>
       <Box className={classes.content}>
         <Typography className={classes.username}>{username}</Typography>
-        <Box className={`${classes.statusDot} ${classes[online && "online"]}`}></Box>
-        <Typography className={classes.statusText}>{online ? "Online" : "Offline"}</Typography>
+        <Box
+          className={`${classes.statusDot} ${classes[online && "online"]}`}
+        />
+        <Typography className={classes.statusText}>
+          {online ? "Online" : "Offline"}
+        </Typography>
       </Box>
-      <MoreHorizIcon classes={{ root: classes.ellipsis }} />
+      <Box mr={2}>
+        <LogoutButton className={classes.logout} />
+      </Box>
     </Box>
   );
 };

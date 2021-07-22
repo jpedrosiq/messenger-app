@@ -2,19 +2,19 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid, CssBaseline } from "@material-ui/core";
-import { SidebarContainer } from "./Sidebar";
-import { ActiveChat } from "./ActiveChat";
-import { logout, fetchConversations } from "../store/utils/thunkCreators";
+import { Button } from "@material-ui/core";
+import { logout } from "../store/utils/thunkCreators";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { clearOnLogout } from "../store/index";
+import { theme } from "../themes/theme";
 
 const styles = {
-  root: {
-    height: "97vh",
+  logout: {
+    color: theme.palette.secondary.main,
   },
 };
 
-class Home extends Component {
+class LogoutButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,10 +30,6 @@ class Home extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.fetchConversations();
-  }
-
   handleLogout = async () => {
     await this.props.logout(this.props.user.id);
   };
@@ -47,12 +43,13 @@ class Home extends Component {
     }
     return (
       <>
-        {/* logout button will eventually be in a dropdown next to username */}
-        <Grid container component="main" className={classes.root}>
-          <CssBaseline />
-          <SidebarContainer />
-          <ActiveChat />
-        </Grid>
+        <Button
+          title="Logout"
+          className={classes.logout}
+          onClick={this.handleLogout}
+        >
+          <MoreHorizIcon classes={{ root: classes.ellipsis }} />
+        </Button>
       </>
     );
   }
@@ -61,7 +58,6 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    conversations: state.conversations,
   };
 };
 
@@ -71,13 +67,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(logout(id));
       dispatch(clearOnLogout());
     },
-    fetchConversations: () => {
-      dispatch(fetchConversations());
-    },
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Home));
+)(withStyles(styles)(LogoutButton));
