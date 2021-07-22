@@ -76,12 +76,15 @@ class Input extends Component {
     // function that handles each promise post request from Cloudinary
     const promiseForAttachmentUrl = (attachment) => {
       formData.append("file", attachment);
-      formData.append("upload_preset", "vgnox97i");
+      formData.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
 
-      return fetch("https://api.cloudinary.com/v1_1/dtcgl7plw/image/upload", {
-        method: "POST",
-        body: formData,
-      });
+      return fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
     };
 
     for (let idx in files) {

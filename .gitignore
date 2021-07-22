@@ -3,6 +3,8 @@
 # dependencies
 node_modules/
 
+# api keys
+client/.env
 
 # production
 /build/
